@@ -1,53 +1,92 @@
-# Diabetes-Disease-Prediction-Model
+# Diabetes Disease Prediction
 
+A machine learning web application that predicts the likelihood of diabetes from diagnostic health measurements, built with Python and Streamlit.
 
-This project is a machine learning-based web application that predicts whether a person is diabetic or not using clinical data such as glucose level, BMI, insulin, and more.
+🔗 **Live Demo:** https://diabetes-prediction-sahasen.streamlit.app/
 
-## 📁 Files and Description
+> **Disclaimer:** This project was built for **educational and learning purposes only**. It is not a medical diagnosis tool and must not be used as a substitute for professional medical advice.
 
-### 1. `Diabete Disease Predicition.ipynb`
-- Jupyter Notebook used for:
-  - Loading and preprocessing the dataset
-  - Training ML models: Logistic Regression, Random Forest, and SVM
-  - Evaluating model accuracy
-  - Plotting model comparison graph.
-  
-### 2. `app.py`
-- Streamlit web application file
-- Allows users to:
-  - Estimate BMI, blood pressure, glucose, and insulin
-  - Enter clinical values for diabetes prediction
-  - Visualize input against dataset distributions
-  - Get model predictions along with warnings based on glucose levels
+---
 
-### 3. `diabetes.csv`
-- Dataset containing health-related metrics for diabetes prediction.
-- Sourced from the Pima Indians Diabetes Dataset.
+## Overview
 
+This project trains a Support Vector Machine (SVM) classifier on the Pima Indians Diabetes dataset and serves it through an interactive web interface. Users can enter health parameters and receive an instant prediction along with a probability score. The app also includes small health utilities and data visualizations.
 
-### 4.`img.jpeg`
-- Project-related image (e.g., output graph or visual content for report). 
+## Features
 
+- **Diabetes Prediction:** enter 8 health parameters and get a prediction with a probability percentage
+- **Glucose Level Analysis:** classifies glucose input as normal, elevated, high or critical
+- **BMI Calculator:** calculates BMI from height and weight
+- **BP, Glucose and Insulin Estimators:** simple rule-based estimators (illustrative only, not clinical formulas)
+- **Data Visualizations:** feature distributions split by outcome, with the user's input marked on the chart
+- **Model Performance:** displays training and test accuracy
+- **Outcome Distribution:** shows the diabetic vs. non-diabetic split in the dataset
 
+## Tech Stack
 
- # 🚀 Features
+| Category | Tools |
+|---|---|
+| Language | Python |
+| ML / Data | scikit-learn, pandas, NumPy |
+| Visualization | Matplotlib, Seaborn |
+| Web App | Streamlit |
+| Deployment | Streamlit Community Cloud, GitHub |
 
-- Predicts whether a patient has diabetes based on inputs like glucose, insulin, BMI, etc.
-- Real-time prediction using trained machine learning models.
-- Glucose level classification and warnings.
-- Body fat calculator component (in JS).
-- Visual comparison of model accuracy.
-- Streamlit-based interactive UI.
+## Dataset
 
+- **Source:** Pima Indians Diabetes Dataset (originally from the National Institute of Diabetes and Digestive and Kidney Diseases), available on Kaggle
+- **Features (8):** Pregnancies, Glucose, Blood Pressure, Skin Thickness, Insulin, BMI, Diabetes Pedigree Function, Age
+- **Target:** `Outcome` (1 = diabetic, 0 = non-diabetic)
 
+## Machine Learning Workflow
 
-## ⚙️ How to Run the Project
+1. Loaded and explored the dataset
+2. Standardized the features using `StandardScaler`
+3. Split the data into 80% training and 20% testing sets
+4. Trained an SVM classifier (linear kernel) with probability estimates enabled
+5. Evaluated the model using accuracy on the train and test sets
+6. Deployed the trained model as a Streamlit web app
 
-### 📌 Requirements
-- Python 3.x
-- Install required libraries:
-  ```bash
-  pip install numpy pandas, scikit-learn, streamlit, matplotlib ,seaborn
+## Project Structure
 
-  To run the code(app.py)------python -m streamlit run app.py
+```
+Diabetes-Disease-Prediction/
+├── app.py                              # Streamlit application
+├── diabetes.csv                        # Dataset
+├── Diabete Disease Predicition.ipynb   # Model development notebook
+├── img.jpeg                            # App image
+├── requirements.txt                    # Python dependencies
+└── README.md
+```
 
+## Run Locally
+
+1. **Clone the repository**
+```bash
+   git clone https://github.com/Sahasen/Diabetes-Disease-Prediction.git
+   cd Diabetes-Disease-Prediction/Diabetes-Disease-Prediction
+```
+
+2. **Install dependencies**
+```bash
+   pip install -r requirements.txt
+```
+
+3. **Run the app**
+```bash
+   python -m streamlit run app.py
+```
+
+## Limitations
+
+- The dataset is small and contains only female patients of Pima Indian heritage, so the model may not generalize to other populations
+- The BP, glucose and insulin estimators use simplified formulas for demonstration
+- Predictions are not clinically validated
+
+## Author
+
+https://github.com/Sahasen
+
+## Purpose
+
+This project was created for learning purposes to demonstrate an end-to-end machine learning workflow, from data preprocessing and model training to web deployment.
