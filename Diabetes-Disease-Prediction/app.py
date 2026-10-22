@@ -35,7 +35,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 model = svm.SVC(kernel='linear', probability=True)
 
 # train the model on the training set
-model.fit(X_train, y_test)
+model.fit(X_train, y_train)
 
 # predictions
 train_y_pred = model.predict(X_train)
