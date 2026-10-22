@@ -8,11 +8,13 @@ from sklearn import svm
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler
 from PIL import Image
+from pathlib import Path
+BASE_DIR = Path(__file__).parent
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 # load the diabetes dataset
-diabetes_df = pd.read_csv('diabetes.csv')
+diabetes_df = pd.read_csv(BASE_DIR / 'diabetes.csv')
 
 # group the data by outcome to get a sense of the distribution
 diabetes_mean_df = diabetes_df.groupby('Outcome').mean()
@@ -79,7 +81,7 @@ def estimate_insulin(bmi, diet, age, activity_level):
 # ---------------- APP ----------------
 def app():
 
-    img = Image.open(r"img.jpeg")
+    img = Image.open(BASE_DIR / "img.jpeg")
     img = img.resize((200, 200))
     st.image(img, caption="Diabetes Image", width=200)
 
