@@ -184,49 +184,47 @@ def app():
         col1.metric("Train Accuracy", f"{train_acc:.2%}")
         col2.metric("Test Accuracy", f"{test_acc:.2%}")
 
-    # ---------------- DATA ----------------
-    st.header("Distribution by Outcome")
+           # ---------------- DATA ----------------
+        st.header("Distribution by Outcome")
 
-    outcome_counts = diabetes_df["Outcome"].value_counts()
-    total = len(diabetes_df)
+        outcome_counts = diabetes_df["Outcome"].value_counts()
+        total = len(diabetes_df)
 
-    col1, col2 = st.columns(2)
-    col1.metric("Non-Diabetic", outcome_counts[0], f"{outcome_counts[0]/total*100:.1f}%")
-    col2.metric("Diabetic", outcome_counts[1], f"{outcome_counts[1]/total*100:.1f}%")
+        col1, col2 = st.columns(2)
+        col1.metric("Non-Diabetic", outcome_counts[0], f"{outcome_counts[0]/total*100:.1f}%")
+        col2.metric("Diabetic", outcome_counts[1], f"{outcome_counts[1]/total*100:.1f}%")
 
-    # ---------------- FIXED VISUALIZATION ----------------
-    if st.checkbox("Show Data Visualizations"):
+        # ---------------- VISUALIZATION ----------------
+        if st.checkbox("Show Data Visualizations"):
 
-        st.header("Data Visualizations")
+            st.header("Data Visualizations")
 
-        feature = st.selectbox(
-            "Select Feature to Visualize",
-            ['Glucose', 'BMI', 'Age', 'BloodPressure', 'Insulin',
-             'SkinThickness', 'DiabetesPedigreeFunction', 'Pregnancies']
-        )
+            feature = st.selectbox(
+                "Select Feature to Visualize",
+                ['Glucose', 'BMI', 'Age', 'BloodPressure', 'Insulin',
+                 'SkinThickness', 'DiabetesPedigreeFunction', 'Pregnancies']
+            )
 
-        # 🔴 FIX: correct session values mapping (NO ERROR NOW)
-        mapping = {
-            'Glucose': glucose,
-            'BMI': bmi,
-            'Age': age,
-            'BloodPressure': bp,
-            'Insulin': insulin,
-            'SkinThickness': skinthickness,
-            'DiabetesPedigreeFunction': dpf,
-            'Pregnancies': preg
-        }
+            mapping = {
+                'Glucose': glucose,
+                'BMI': bmi,
+                'Age': age,
+                'BloodPressure': bp,
+                'Insulin': insulin,
+                'SkinThickness': skinthickness,
+                'DiabetesPedigreeFunction': dpf,
+                'Pregnancies': preg
+            }
 
-        user_value = mapping.get(feature, None)
+            user_value = mapping.get(feature)
 
-        fig, ax = plt.subplots(figsize=(10, 6))
-        sns.histplot(data=diabetes_df, x=feature, hue='Outcome', multiple="stack", ax=ax)
+            fig, ax = plt.subplots(figsize=(10, 6))
+            sns.histplot(data=diabetes_df, x=feature, hue='Outcome', multiple="stack", ax=ax)
 
-        if user_value is not None:
-            ax.axvline(user_value, color='red', linestyle='--')
+            if user_value is not None:
+                ax.axvline(user_value, color='red', linestyle='--')
 
-        st.pyplot(fig)
-
+            st.pyplot(fig)
 
 if __name__ == "__main__":
     app()
